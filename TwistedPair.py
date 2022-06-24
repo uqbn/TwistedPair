@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 #*******************************************************
-# ×÷Õß£ºÎéÒ«êÍ              Author: YaoHui.Wu          *
-# ¿ªÔ´ÈÕÆÚ£º2022Äê6ÔÂ7ÈÕ    Open Source Date: 2022-6-7 *
-# ¹ú¼Ò£ºÖÐ¹ú                Country: China             *
+# ä½œè€…ï¼šä¼è€€æ™–              Author: YaoHui.Wu          *
+# å¼€æºæ—¥æœŸï¼š2022å¹´6æœˆ7æ—¥    Open Source Date: 2022-6-7 *
+# å›½å®¶ï¼šä¸­å›½                Country: China             *
 #*******************************************************
 
 import sys
@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
             baCiphertext[2 * j] = iTrinary & 255
 
-            baCiphertext[2 * j + 1] = iTrinary >> 8 & 255
+            baCiphertext[2 * j + 1] = iTrinary >> 8
 
             k = (k + 1) % iPasswordLength
 
