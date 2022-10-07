@@ -1,7 +1,7 @@
 (*******************************************************
-* ◊˜’ﬂ£∫ŒÈ“´ÍÕ              Author: YaoHui.Wu          *
-* ø™‘¥»’∆⁄£∫2022ƒÍ6‘¬7»’    Open Source Date: 2022-6-7 *
-* π˙º“£∫÷–π˙                Country: China             *
+* ‰ΩúËÄÖÔºö‰ºçËÄÄÊôñ              Author: YaoHui.Wu          *
+* ÂºÄÊ∫êÊó•ÊúüÔºö2022Âπ¥6Êúà7Êó•    Open Source Date: 2022-6-7 *
+* ÂõΩÂÆ∂Ôºö‰∏≠ÂõΩ                Country: China             *
 *******************************************************)
 (* Compiled by free pascal. free pascal website: www.freepascal.org *)
 
@@ -50,8 +50,8 @@ End;
  2 2 0
 *)
 
-Procedure TernaryXor(Var baCiphertextOrPlaintext : TrinaryArray;
-                     Var baPassword : TrinaryArray);
+Procedure TernaryXor0(Var baCiphertextOrPlaintext : TrinaryArray;
+                      Var baPassword : TrinaryArray);
 Var
     j : Byte;
 
@@ -98,13 +98,66 @@ Begin
 End;
 
 (*
+ 0 2 2
+ 1 1 1
+ 2 0 0
+*)
+
+Procedure TernaryXor2(Var baCiphertextOrPlaintext : TrinaryArray;
+                      Var baPassword : TrinaryArray);
+Var
+    j : Byte;
+
+Begin
+    For j := 0 To 5 Do
+    Begin
+        If (baCiphertextOrPlaintext[j] = 0) And (baPassword[j] = 0) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 0;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 0) And (baPassword[j] = 1) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 2;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 0) And (baPassword[j] = 2) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 2;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 1) And (baPassword[j] = 0) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 1;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 1) And (baPassword[j] = 1) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 1;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 1) And (baPassword[j] = 2) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 1;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 2) And (baPassword[j] = 0) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 2;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 2) And (baPassword[j] = 1) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 0;
+        End
+        Else If (baCiphertextOrPlaintext[j] = 2) And (baPassword[j] = 2) Then
+        Begin
+            baCiphertextOrPlaintext[j] := 0;
+        End
+    End;
+End;
+
+(*
  2 0 0
  1 1 1
  0 2 2
 *)
 
-Procedure TernaryXand(Var baCiphertextOrPlaintext : TrinaryArray;
-                      Var baPassword : TrinaryArray);
+Procedure TernaryXand0(Var baCiphertextOrPlaintext : TrinaryArray;
+                       Var baPassword : TrinaryArray);
 Var
     k : Byte;
 
@@ -142,6 +195,59 @@ Begin
         Else If (baCiphertextOrPlaintext[k] = 2) And (baPassword[k] = 1) Then
         Begin
             baCiphertextOrPlaintext[k] := 2;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 2) And (baPassword[k] = 2) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 2;
+        End
+    End;
+End;
+
+(*
+ 2 2 0
+ 1 1 1
+ 0 0 2
+*)
+
+Procedure TernaryXand2(Var baCiphertextOrPlaintext : TrinaryArray;
+                       Var baPassword : TrinaryArray);
+Var
+    k : Byte;
+
+Begin
+    For k := 0 To 5 Do
+    Begin
+        If (baCiphertextOrPlaintext[k] = 0) And (baPassword[k] = 0) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 2;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 0) And (baPassword[k] = 1) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 2;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 0) And (baPassword[k] = 2) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 0;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 1) And (baPassword[k] = 0) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 1;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 1) And (baPassword[k] = 1) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 1;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 1) And (baPassword[k] = 2) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 1;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 2) And (baPassword[k] = 0) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 0;
+        End
+        Else If (baCiphertextOrPlaintext[k] = 2) And (baPassword[k] = 1) Then
+        Begin
+            baCiphertextOrPlaintext[k] := 0;
         End
         Else If (baCiphertextOrPlaintext[k] = 2) And (baPassword[k] = 2) Then
         Begin
@@ -208,9 +314,29 @@ Begin
         Begin
             Ternary(bpPlaintext[j], baPlaintextOrCiphertext);
 
-            TernaryXor(baPlaintextOrCiphertext, baPassword[k]);
+            TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
 
-            TernaryXand(baPlaintextOrCiphertext, baPassword[k]);
+            TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+            (*TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);*)
 
             wpCiphertext[j] := 243 * baPlaintextOrCiphertext[0] + 81 * baPlaintextOrCiphertext[1] + 27 * baPlaintextOrCiphertext[2] + 9 * baPlaintextOrCiphertext[3] + 3 * baPlaintextOrCiphertext[4] + baPlaintextOrCiphertext[5];
 
@@ -269,9 +395,29 @@ Begin
         Begin
             Ternary(wpCiphertext[j], baPlaintextOrCiphertext);
 
-            TernaryXand(baPlaintextOrCiphertext, baPassword[k]);
+            TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
 
-            TernaryXor(baPlaintextOrCiphertext, baPassword[k]);
+            TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+            (*TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+            TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);*)
 
             bpPlaintext[j] := 243 * baPlaintextOrCiphertext[0] + 81 * baPlaintextOrCiphertext[1] + 27 * baPlaintextOrCiphertext[2] + 9 * baPlaintextOrCiphertext[3] + 3 * baPlaintextOrCiphertext[4] + baPlaintextOrCiphertext[5];
 
