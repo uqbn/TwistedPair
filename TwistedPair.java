@@ -1,7 +1,7 @@
 /*******************************************************
-* ×÷Õß£ºÎéÒ«êÍ              Author: YaoHui.Wu          *
-* ¿ªÔ´ÈÕÆÚ£º2022Äê6ÔÂ7ÈÕ    Open Source Date: 2022-6-7 *
-* ¹ú¼Ò£ºÖĞ¹ú                Country: China             *
+* ä½œè€…ï¼šä¼è€€æ™–              Author: YaoHui.Wu          *
+* å¼€æºæ—¥æœŸï¼š2022å¹´6æœˆ7æ—¥    Open Source Date: 2022-6-7 *
+* å›½å®¶ï¼šä¸­å›½                Country: China             *
 *******************************************************/
 
 import java.io.*;
@@ -33,8 +33,8 @@ public class TwistedPair
 // 1 1 1
 // 2 2 0
 
-    private static void TernaryXor(byte[] baCiphertextOrPlaintext,
-                                   byte[] baPassword)
+    private static void TernaryXor0(byte[] baCiphertextOrPlaintext,
+                                    byte[] baPassword)
     {
         for(int j = 0; j < 6; ++j)
         {
@@ -77,12 +77,60 @@ public class TwistedPair
         }
     }
 
+// 0 2 2
+// 1 1 1
+// 2 0 0
+
+    private static void TernaryXor2(byte[] baCiphertextOrPlaintext,
+                                    byte[] baPassword)
+    {
+        for(int j = 0; j < 6; ++j)
+        {
+            if(baCiphertextOrPlaintext[j] == 0 && baPassword[j] == 0)
+            {
+                baCiphertextOrPlaintext[j] = 0;
+            }
+            else if(baCiphertextOrPlaintext[j] == 0 && baPassword[j] == 1)
+            {
+                baCiphertextOrPlaintext[j] = 2;
+            }
+            else if(baCiphertextOrPlaintext[j] == 0 && baPassword[j] == 2)
+            {
+                baCiphertextOrPlaintext[j] = 2;
+            }
+            else if(baCiphertextOrPlaintext[j] == 1 && baPassword[j] == 0)
+            {
+                baCiphertextOrPlaintext[j] = 1;
+            }
+            else if(baCiphertextOrPlaintext[j] == 1 && baPassword[j] == 1)
+            {
+                baCiphertextOrPlaintext[j] = 1;
+            }
+            else if(baCiphertextOrPlaintext[j] == 1 && baPassword[j] == 2)
+            {
+                baCiphertextOrPlaintext[j] = 1;
+            }
+            else if(baCiphertextOrPlaintext[j] == 2 && baPassword[j] == 0)
+            {
+                baCiphertextOrPlaintext[j] = 2;
+            }
+            else if(baCiphertextOrPlaintext[j] == 2 && baPassword[j] == 1)
+            {
+                baCiphertextOrPlaintext[j] = 0;
+            }
+            else if(baCiphertextOrPlaintext[j] == 2 && baPassword[j] == 2)
+            {
+                baCiphertextOrPlaintext[j] = 0;
+            }
+        }
+    }
+
 // 2 0 0
 // 1 1 1
 // 0 2 2
 
-    private static void TernaryXand(byte[] baCiphertextOrPlaintext,
-                                    byte[] baPassword)
+    private static void TernaryXand0(byte[] baCiphertextOrPlaintext,
+                                     byte[] baPassword)
     {
         for(int k = 0; k < 6; ++k)
         {
@@ -117,6 +165,54 @@ public class TwistedPair
             else if(baCiphertextOrPlaintext[k] == 2 && baPassword[k] == 1)
             {
                 baCiphertextOrPlaintext[k] = 2;
+            }
+            else if(baCiphertextOrPlaintext[k] == 2 && baPassword[k] == 2)
+            {
+                baCiphertextOrPlaintext[k] = 2;
+            }
+        }
+    }
+
+// 2 2 0
+// 1 1 1
+// 0 0 2
+
+    private static void TernaryXand2(byte[] baCiphertextOrPlaintext,
+                                     byte[] baPassword)
+    {
+        for(int k = 0; k < 6; ++k)
+        {
+            if(baCiphertextOrPlaintext[k] == 0 && baPassword[k] == 0)
+            {
+                baCiphertextOrPlaintext[k] = 2;
+            }
+            else if(baCiphertextOrPlaintext[k] == 0 && baPassword[k] == 1)
+            {
+                baCiphertextOrPlaintext[k] = 2;
+            }
+            else if(baCiphertextOrPlaintext[k] == 0 && baPassword[k] == 2)
+            {
+                baCiphertextOrPlaintext[k] = 0;
+            }
+            else if(baCiphertextOrPlaintext[k] == 1 && baPassword[k] == 0)
+            {
+                baCiphertextOrPlaintext[k] = 1;
+            }
+            else if(baCiphertextOrPlaintext[k] == 1 && baPassword[k] == 1)
+            {
+                baCiphertextOrPlaintext[k] = 1;
+            }
+            else if(baCiphertextOrPlaintext[k] == 1 && baPassword[k] == 2)
+            {
+                baCiphertextOrPlaintext[k] = 1;
+            }
+            else if(baCiphertextOrPlaintext[k] == 2 && baPassword[k] == 0)
+            {
+                baCiphertextOrPlaintext[k] = 0;
+            }
+            else if(baCiphertextOrPlaintext[k] == 2 && baPassword[k] == 1)
+            {
+                baCiphertextOrPlaintext[k] = 0;
             }
             else if(baCiphertextOrPlaintext[k] == 2 && baPassword[k] == 2)
             {
@@ -169,9 +265,29 @@ public class TwistedPair
                 {
                     Ternary(rafPlaintext.readUnsignedByte(), baPlaintextOrCiphertext);
 
-                    TernaryXor(baPlaintextOrCiphertext, baPassword[k]);
+                    TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
 
-                    TernaryXand(baPlaintextOrCiphertext, baPassword[k]);
+                    TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+                    /*TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXor0(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXor2(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXand0(baPlaintextOrCiphertext, baPassword[k]);
+
+                    TernaryXand2(baPlaintextOrCiphertext, baPassword[k]);*/
 
                     rafCiphertext.writeShort(243 * baPlaintextOrCiphertext[0] + 81 * baPlaintextOrCiphertext[1] + 27 * baPlaintextOrCiphertext[2] + 9 * baPlaintextOrCiphertext[3] + 3 * baPlaintextOrCiphertext[4] + baPlaintextOrCiphertext[5]);
 
@@ -240,9 +356,29 @@ public class TwistedPair
                 {
                     Ternary(rafCiphertext.readUnsignedShort(), baCiphertextOrPlaintext);
 
-                    TernaryXand(baCiphertextOrPlaintext, baPassword[k]);
+                    TernaryXor2(baCiphertextOrPlaintext, baPassword[k]);
 
-                    TernaryXor(baCiphertextOrPlaintext, baPassword[k]);
+                    TernaryXor0(baCiphertextOrPlaintext, baPassword[k]);
+
+                    /*TernaryXand0(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXor0(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXand2(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXor0(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXand0(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXor2(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXand2(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXor2(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXand2(baCiphertextOrPlaintext, baPassword[k]);
+
+                    TernaryXand0(baCiphertextOrPlaintext, baPassword[k]);*/
 
                     rafPlaintext.writeByte(243 * baCiphertextOrPlaintext[0] + 81 * baCiphertextOrPlaintext[1] + 27 * baCiphertextOrPlaintext[2] + 9 * baCiphertextOrPlaintext[3] + 3 * baCiphertextOrPlaintext[4] + baCiphertextOrPlaintext[5]);
 
