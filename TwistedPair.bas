@@ -1,7 +1,7 @@
 /'******************************************************
-* ◊˜’ﬂ£∫ŒÈ“´ÍÕ              Author: YaoHui.Wu          *
-* ø™‘¥»’∆⁄£∫2022ƒÍ6‘¬7»’    Open Source Date: 2022-6-7 *
-* π˙º“£∫÷–π˙                Country: China             *
+* ‰ΩúËÄÖÔºö‰ºçËÄÄÊôñ              Author: YaoHui.Wu          *
+* ÂºÄÊ∫êÊó•ÊúüÔºö2022Âπ¥6Êúà7Êó•    Open Source Date: 2022-6-7 *
+* ÂõΩÂÆ∂Ôºö‰∏≠ÂõΩ                Country: China             *
 ******************************************************'/
 ' Compiled by free basic. free basic website: www.freebasic.net
 
@@ -39,7 +39,7 @@ End Sub
  2 2 0
 '/
 
-Sub TernaryXor(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer)
+Sub TernaryXor0(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer)
     For j As UByte = 0 To 5
         If ubaPlaintextOrCiphertext(j) = 0 AndAlso ubpPassword[j] = 0 Then
             ubaPlaintextOrCiphertext(j) = 0
@@ -64,12 +64,42 @@ Sub TernaryXor(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer
 End Sub
 
 /'
+ 0 2 2
+ 1 1 1
+ 2 0 0
+'/
+
+Sub TernaryXor2(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer)
+    For j As UByte = 0 To 5
+        If ubaPlaintextOrCiphertext(j) = 0 AndAlso ubpPassword[j] = 0 Then
+            ubaPlaintextOrCiphertext(j) = 0
+        Elseif ubaPlaintextOrCiphertext(j) = 0 AndAlso ubpPassword[j] = 1 Then
+            ubaPlaintextOrCiphertext(j) = 2
+        Elseif ubaPlaintextOrCiphertext(j) = 0 AndAlso ubpPassword[j] = 2 Then
+            ubaPlaintextOrCiphertext(j) = 2
+        Elseif ubaPlaintextOrCiphertext(j) = 1 AndAlso ubpPassword[j] = 0 Then
+            ubaPlaintextOrCiphertext(j) = 1
+        Elseif ubaPlaintextOrCiphertext(j) = 1 AndAlso ubpPassword[j] = 1 Then
+            ubaPlaintextOrCiphertext(j) = 1
+        Elseif ubaPlaintextOrCiphertext(j) = 1 AndAlso ubpPassword[j] = 2 Then
+            ubaPlaintextOrCiphertext(j) = 1
+        Elseif ubaPlaintextOrCiphertext(j) = 2 AndAlso ubpPassword[j] = 0 Then
+            ubaPlaintextOrCiphertext(j) = 2
+        Elseif ubaPlaintextOrCiphertext(j) = 2 AndAlso ubpPassword[j] = 1 Then
+            ubaPlaintextOrCiphertext(j) = 0
+        Elseif ubaPlaintextOrCiphertext(j) = 2 AndAlso ubpPassword[j] = 2 Then
+            ubaPlaintextOrCiphertext(j) = 0
+        End If
+    Next j
+End Sub
+
+/'
  2 0 0
  1 1 1
  0 2 2
 '/
 
-Sub TernaryXand(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer)
+Sub TernaryXand0(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer)
     For k As UByte = 0 To 5
         If ubaPlaintextOrCiphertext(k) = 0 AndAlso ubpPassword[k] = 0 Then
             ubaPlaintextOrCiphertext(k) = 2
@@ -87,6 +117,36 @@ Sub TernaryXand(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointe
             ubaPlaintextOrCiphertext(k) = 0
         Elseif ubaPlaintextOrCiphertext(k) = 2 AndAlso ubpPassword[k] = 1 Then
             ubaPlaintextOrCiphertext(k) = 2
+        Elseif ubaPlaintextOrCiphertext(k) = 2 AndAlso ubpPassword[k] = 2 Then
+            ubaPlaintextOrCiphertext(k) = 2
+        End If
+    Next k
+End Sub
+
+/'
+ 2 2 0
+ 1 1 1
+ 0 0 2
+'/
+
+Sub TernaryXand2(ubaPlaintextOrCiphertext() As UByte, ubpPassword As UByte Pointer)
+    For k As UByte = 0 To 5
+        If ubaPlaintextOrCiphertext(k) = 0 AndAlso ubpPassword[k] = 0 Then
+            ubaPlaintextOrCiphertext(k) = 2
+        Elseif ubaPlaintextOrCiphertext(k) = 0 AndAlso ubpPassword[k] = 1 Then
+            ubaPlaintextOrCiphertext(k) = 2
+        Elseif ubaPlaintextOrCiphertext(k) = 0 AndAlso ubpPassword[k] = 2 Then
+            ubaPlaintextOrCiphertext(k) = 0
+        Elseif ubaPlaintextOrCiphertext(k) = 1 AndAlso ubpPassword[k] = 0 Then
+            ubaPlaintextOrCiphertext(k) = 1
+        Elseif ubaPlaintextOrCiphertext(k) = 1 AndAlso ubpPassword[k] = 1 Then
+            ubaPlaintextOrCiphertext(k) = 1
+        Elseif ubaPlaintextOrCiphertext(k) = 1 AndAlso ubpPassword[k] = 2 Then
+            ubaPlaintextOrCiphertext(k) = 1
+        Elseif ubaPlaintextOrCiphertext(k) = 2 AndAlso ubpPassword[k] = 0 Then
+            ubaPlaintextOrCiphertext(k) = 0
+        Elseif ubaPlaintextOrCiphertext(k) = 2 AndAlso ubpPassword[k] = 1 Then
+            ubaPlaintextOrCiphertext(k) = 0
         Elseif ubaPlaintextOrCiphertext(k) = 2 AndAlso ubpPassword[k] = 2 Then
             ubaPlaintextOrCiphertext(k) = 2
         End If
@@ -147,9 +207,29 @@ Sub Main()
         For j As ULongInt = 0 To ulFileSize - 1
             Ternary(ubpPlaintext[j], @ubaPlaintextOrCiphertext(0))
 
-            TernaryXor(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+            TernaryXor0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
 
-            TernaryXand(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+            TernaryXor2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            /'TernaryXor0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))'/
 
             uspCiphertext[j] = 243 * ubaPlaintextOrCiphertext(0) + 81 * ubaPlaintextOrCiphertext(1) + 27 * ubaPlaintextOrCiphertext(2) + 9 * ubaPlaintextOrCiphertext(3) + 3 * ubaPlaintextOrCiphertext(4) + ubaPlaintextOrCiphertext(5)
 
@@ -197,9 +277,29 @@ Sub Main()
         For j As ULongInt = 0 To ulFileSize - 1
             Ternary(uspCiphertext[j], @ubaPlaintextOrCiphertext(0))
 
-            TernaryXand(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+            TernaryXor2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
 
-            TernaryXor(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+            TernaryXor0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            /'TernaryXand0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXor2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand2(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))
+
+            TernaryXand0(ubaPlaintextOrCiphertext(), @ubaPassword(k, 0))'/
 
             ubpPlaintext[j] = 243 * ubaPlaintextOrCiphertext(0) + 81 * ubaPlaintextOrCiphertext(1) + 27 * ubaPlaintextOrCiphertext(2) + 9 * ubaPlaintextOrCiphertext(3) + 3 * ubaPlaintextOrCiphertext(4) + ubaPlaintextOrCiphertext(5)
 
