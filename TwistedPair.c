@@ -1,7 +1,7 @@
 /*******************************************************
-* ×÷Õß£ºÎéÒ«êÍ              Author: YaoHui.Wu          *
-* ¿ªÔ´ÈÕÆÚ£º2022Äê6ÔÂ7ÈÕ    Open Source Date: 2022-6-7 *
-* ¹ú¼Ò£ºÖĞ¹ú                Country: China             *
+* ä½œè€…ï¼šä¼è€€æ™–              Author: YaoHui.Wu          *
+* å¼€æºæ—¥æœŸï¼š2022å¹´6æœˆ7æ—¥    Open Source Date: 2022-6-7 *
+* å›½å®¶ï¼šä¸­å›½                Country: China             *
 *******************************************************/
 
 #include <fcntl.h>
@@ -35,8 +35,8 @@ void Ternary(long long lNumeric,
 // 1 1 1
 // 2 2 0
 
-void TernaryXor(unsigned char *ucpCiphertextOrPlaintext,
-                unsigned char *ucpPassword)
+void TernaryXor0(unsigned char *ucpCiphertextOrPlaintext,
+                 unsigned char *ucpPassword)
 {
     for(long long j = 0; j < 6; ++j)
     {
@@ -79,12 +79,60 @@ void TernaryXor(unsigned char *ucpCiphertextOrPlaintext,
     }
 }
 
+// 0 2 2
+// 1 1 1
+// 2 0 0
+
+void TernaryXor2(unsigned char *ucpCiphertextOrPlaintext,
+                 unsigned char *ucpPassword)
+{
+    for(long long j = 0; j < 6; ++j)
+    {
+        if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 0)
+        {
+            ucpCiphertextOrPlaintext[j] = 0;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 1)
+        {
+            ucpCiphertextOrPlaintext[j] = 2;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 2)
+        {
+            ucpCiphertextOrPlaintext[j] = 2;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 0)
+        {
+            ucpCiphertextOrPlaintext[j] = 1;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 1)
+        {
+            ucpCiphertextOrPlaintext[j] = 1;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 2)
+        {
+            ucpCiphertextOrPlaintext[j] = 1;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 0)
+        {
+            ucpCiphertextOrPlaintext[j] = 2;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 1)
+        {
+            ucpCiphertextOrPlaintext[j] = 0;
+        }
+        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 2)
+        {
+            ucpCiphertextOrPlaintext[j] = 0;
+        }
+    }
+}
+
 // 2 0 0
 // 1 1 1
 // 0 2 2
 
-void TernaryXand(unsigned char *ucpCiphertextOrPlaintext,
-                 unsigned char *ucpPassword)
+void TernaryXand0(unsigned char *ucpCiphertextOrPlaintext,
+                  unsigned char *ucpPassword)
 {
     for(long long k = 0; k < 6; ++k)
     {
@@ -119,6 +167,54 @@ void TernaryXand(unsigned char *ucpCiphertextOrPlaintext,
         else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 2;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 2)
+        {
+            ucpCiphertextOrPlaintext[k] = 2;
+        }
+    }
+}
+
+// 2 2 0
+// 1 1 1
+// 0 0 2
+
+void TernaryXand2(unsigned char *ucpCiphertextOrPlaintext,
+                  unsigned char *ucpPassword)
+{
+    for(long long k = 0; k < 6; ++k)
+    {
+        if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 0)
+        {
+            ucpCiphertextOrPlaintext[k] = 2;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 1)
+        {
+            ucpCiphertextOrPlaintext[k] = 2;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 2)
+        {
+            ucpCiphertextOrPlaintext[k] = 0;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 0)
+        {
+            ucpCiphertextOrPlaintext[k] = 1;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 1)
+        {
+            ucpCiphertextOrPlaintext[k] = 1;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 2)
+        {
+            ucpCiphertextOrPlaintext[k] = 1;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 0)
+        {
+            ucpCiphertextOrPlaintext[k] = 0;
+        }
+        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 1)
+        {
+            ucpCiphertextOrPlaintext[k] = 0;
         }
         else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 2)
         {
@@ -174,9 +270,29 @@ long long main(long long argc,
         {
             Ternary(ucpPlaintext[j], ucaPlaintextOrCiphertext);
 
-            TernaryXor(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TernaryXor0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TernaryXor2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            /*TernaryXor0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXand0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXor0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXand2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXor2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXand0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXor2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXand2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXand0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+
+            TernaryXand2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);*/
 
             uspCiphertext[j] = 243 * ucaPlaintextOrCiphertext[0] + 81 * ucaPlaintextOrCiphertext[1] + 27 * ucaPlaintextOrCiphertext[2] + 9 * ucaPlaintextOrCiphertext[3] + 3 * ucaPlaintextOrCiphertext[4] + ucaPlaintextOrCiphertext[5];
 
@@ -235,9 +351,29 @@ long long main(long long argc,
         {
             Ternary(uspCiphertext[j], ucaCiphertextOrPlaintext);
 
-            TernaryXand(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TernaryXor2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXor(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TernaryXor0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            /*TernaryXand0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXor0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXand2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXor0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXand0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXor2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXand2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXor2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXand2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+
+            TernaryXand0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);*/
 
             ucpPlaintext[j] = 243 * ucaCiphertextOrPlaintext[0] + 81 * ucaCiphertextOrPlaintext[1] + 27 * ucaCiphertextOrPlaintext[2] + 9 * ucaCiphertextOrPlaintext[3] + 3 * ucaCiphertextOrPlaintext[4] + ucaCiphertextOrPlaintext[5];
 
