@@ -33,7 +33,7 @@ def Trinary(iNumeric):
 # 1 1 1
 # 2 2 0
 
-def TernaryXor(lTrinary, lPassword):
+def TernaryXor0(lTrinary, lPassword):
     for j in range(6):
        if lTrinary[j] == lPassword[j] == 0: lTrinary[j] = 0
 
@@ -55,11 +55,37 @@ def TernaryXor(lTrinary, lPassword):
 
     return lTrinary
 
+# 0 2 2
+# 1 1 1
+# 2 0 0
+
+def TernaryXor2(lTrinary, lPassword):
+    for j in range(6):
+       if lTrinary[j] == lPassword[j] == 0: lTrinary[j] = 0
+
+       elif lTrinary[j] == 0 and lPassword[j] == 1: lTrinary[j] = 2
+
+       elif lTrinary[j] == 0 and lPassword[j] == 2: lTrinary[j] = 2
+
+       elif lTrinary[j] == 1 and lPassword[j] == 0: lTrinary[j] = 1
+
+       elif lTrinary[j] == lPassword[j] == 1: lTrinary[j] = 1
+
+       elif lTrinary[j] == 1 and lPassword[j] == 2: lTrinary[j] = 1
+
+       elif lTrinary[j] == 2 and lPassword[j] == 0: lTrinary[j] = 2
+
+       elif lTrinary[j] == 2 and lPassword[j] == 1: lTrinary[j] = 0
+
+       elif lTrinary[j] == lPassword[j] == 2: lTrinary[j] = 0
+
+    return lTrinary
+
 # 2 0 0
 # 1 1 1
 # 0 2 2
 
-def TernaryXand(lTrinary, lPassword):
+def TernaryXand0(lTrinary, lPassword):
     for k in range(6):
        if lTrinary[k] == lPassword[k] == 0: lTrinary[k] = 2
 
@@ -76,6 +102,32 @@ def TernaryXand(lTrinary, lPassword):
        elif lTrinary[k] == 2 and lPassword[k] == 0: lTrinary[k] = 0
 
        elif lTrinary[k] == 2 and lPassword[k] == 1: lTrinary[k] = 2
+
+       elif lTrinary[k] == lPassword[k] == 2: lTrinary[k] = 2
+
+    return lTrinary
+
+# 2 2 0
+# 1 1 1
+# 0 0 2
+
+def TernaryXand2(lTrinary, lPassword):
+    for k in range(6):
+       if lTrinary[k] == lPassword[k] == 0: lTrinary[k] = 2
+
+       elif lTrinary[k] == 0 and lPassword[k] == 1: lTrinary[k] = 2
+
+       elif lTrinary[k] == 0 and lPassword[k] == 2: lTrinary[k] = 0
+
+       elif lTrinary[k] == 1 and lPassword[k] == 0: lTrinary[k] = 1
+
+       elif lTrinary[k] == lPassword[k] == 1: lTrinary[k] = 1
+
+       elif lTrinary[k] == 1 and lPassword[k] == 2: lTrinary[k] = 1
+
+       elif lTrinary[k] == 2 and lPassword[k] == 0: lTrinary[k] = 0
+
+       elif lTrinary[k] == 2 and lPassword[k] == 1: lTrinary[k] = 0
 
        elif lTrinary[k] == lPassword[k] == 2: lTrinary[k] = 2
 
@@ -105,9 +157,29 @@ if __name__ == "__main__":
         for j in range(iFileSize):
             Ternary(bPlaintext[j], lTrinary)
 
-            TernaryXor(lTrinary, lPassword[k])
+            TernaryXor0(lTrinary, lPassword[k])
 
-            TernaryXand(lTrinary, lPassword[k])
+            TernaryXor2(lTrinary, lPassword[k])
+
+            #TernaryXor0(lTrinary, lPassword[k])
+
+            #TernaryXand0(lTrinary, lPassword[k])
+
+            #TernaryXor0(lTrinary, lPassword[k])
+
+            #TernaryXand2(lTrinary, lPassword[k])
+
+            #TernaryXor2(lTrinary, lPassword[k])
+
+            #TernaryXand0(lTrinary, lPassword[k])
+
+            #TernaryXor2(lTrinary, lPassword[k])
+
+            #TernaryXand2(lTrinary, lPassword[k])
+
+            #TernaryXand0(lTrinary, lPassword[k])
+
+            #TernaryXand2(lTrinary, lPassword[k])
 
             iTrinary = 243 * lTrinary[0] + 81 * lTrinary[1] + 27 * lTrinary[2] + 9 * lTrinary[3] + 3 * lTrinary[4] + lTrinary[5]
 
@@ -143,9 +215,29 @@ if __name__ == "__main__":
         for j in range(iFileSize):
             Ternary(bCiphertext[2 * j] + (bCiphertext[2 * j + 1] << 8), lTrinary)
 
-            TernaryXand(lTrinary, lPassword[k])
+            TernaryXor2(lTrinary, lPassword[k])
 
-            TernaryXor(lTrinary, lPassword[k])
+            TernaryXor0(lTrinary, lPassword[k])
+
+            #TernaryXand0(lTrinary, lPassword[k])
+
+            #TernaryXor0(lTrinary, lPassword[k])
+
+            #TernaryXand2(lTrinary, lPassword[k])
+
+            #TernaryXor0(lTrinary, lPassword[k])
+
+            #TernaryXand0(lTrinary, lPassword[k])
+
+            #TernaryXor2(lTrinary, lPassword[k])
+
+            #TernaryXand2(lTrinary, lPassword[k])
+
+            #TernaryXor2(lTrinary, lPassword[k])
+
+            #TernaryXand2(lTrinary, lPassword[k])
+
+            #TernaryXand0(lTrinary, lPassword[k])
 
             baPlaintext[j] = 243 * lTrinary[0] + 81 * lTrinary[1] + 27 * lTrinary[2] + 9 * lTrinary[3] + 3 * lTrinary[4] + lTrinary[5]
 
