@@ -1,8 +1,8 @@
-/*******************************************************
-* ä½œè€…ï¼šä¼è€€æ™–              Author: YaoHui.Wu          *
-* å¼€æºæ—¥æœŸï¼š2022å¹´6æœˆ7æ—¥    Open Source Date: 2022-6-7 *
-* å›½å®¶ï¼šä¸­å›½                Country: China             *
-*******************************************************/
+/************************************************************
+* ×÷Õß£ºÎéÒ«êÍ              Author: Geek.Zhiyuan            *
+* ¿ªÔ´ÈÕÆÚ£º2022Äê6ÔÂ7ÈÕ    Open Source Date: 2022-6-7      *
+* ¹ú¼Ò³ÇÊĞ£ºÖĞ¹ú¹ãÖİ        City, Country: GuangZhou, China *
+************************************************************/
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -15,14 +15,14 @@ void Usage()
     printf("Usage\n\tEncryption: TwistedPair -e/-E Plaintext.file Ciphertext.file Password\n\tDecryption: TwistedPair -d/-D Ciphertext.file Plaintext.file Password\n");
 }
 
-void Ternary(long long lNumeric,
-             unsigned char *ucpTrinary)
+void Trinary(unsigned char *ucpTrinary,
+             long long lNumeric)
 {
     ucpTrinary[0] = ucpTrinary[1] = ucpTrinary[2] = ucpTrinary[3] = ucpTrinary[4] = ucpTrinary[5] =  0;
 
-    if(lNumeric != 0)
+    if (lNumeric != 0)
     {
-        for(long long i = 5; i > -1; --i)
+        for (long long i = 5; i > -1; --i)
         {
             ucpTrinary[i] = lNumeric % 3;
 
@@ -35,44 +35,44 @@ void Ternary(long long lNumeric,
 // 1 1 1
 // 2 2 0
 
-void TernaryXor0(unsigned char *ucpCiphertextOrPlaintext,
+void TrinaryXOr0(unsigned char *ucpCiphertextOrPlaintext,
                  unsigned char *ucpPassword)
 {
-    for(long long j = 0; j < 6; ++j)
+    for (long long j = 0; j < 6; ++j)
     {
-        if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 0)
+        if (ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 0)
         {
             ucpCiphertextOrPlaintext[j] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 1)
+        else if (ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 1)
         {
             ucpCiphertextOrPlaintext[j] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 2)
+        else if (ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 2)
         {
             ucpCiphertextOrPlaintext[j] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 0)
+        else if (ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 0)
         {
             ucpCiphertextOrPlaintext[j] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 1)
+        else if (ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 1)
         {
             ucpCiphertextOrPlaintext[j] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 2)
+        else if (ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 2)
         {
             ucpCiphertextOrPlaintext[j] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 0)
+        else if (ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 0)
         {
             ucpCiphertextOrPlaintext[j] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 1)
+        else if (ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 1)
         {
             ucpCiphertextOrPlaintext[j] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 2)
+        else if (ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 2)
         {
             ucpCiphertextOrPlaintext[j] = 0;
         }
@@ -83,44 +83,44 @@ void TernaryXor0(unsigned char *ucpCiphertextOrPlaintext,
 // 1 1 1
 // 2 0 0
 
-void TernaryXor2(unsigned char *ucpCiphertextOrPlaintext,
+void TrinaryXOr2(unsigned char *ucpCiphertextOrPlaintext,
                  unsigned char *ucpPassword)
 {
-    for(long long j = 0; j < 6; ++j)
+    for (long long j = 0; j < 6; ++j)
     {
-        if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 0)
+        if (ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 0)
         {
             ucpCiphertextOrPlaintext[j] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 1)
+        else if (ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 1)
         {
             ucpCiphertextOrPlaintext[j] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 2)
+        else if (ucpCiphertextOrPlaintext[j] == 0 && ucpPassword[j] == 2)
         {
             ucpCiphertextOrPlaintext[j] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 0)
+        else if (ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 0)
         {
             ucpCiphertextOrPlaintext[j] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 1)
+        else if (ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 1)
         {
             ucpCiphertextOrPlaintext[j] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 2)
+        else if (ucpCiphertextOrPlaintext[j] == 1 && ucpPassword[j] == 2)
         {
             ucpCiphertextOrPlaintext[j] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 0)
+        else if (ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 0)
         {
             ucpCiphertextOrPlaintext[j] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 1)
+        else if (ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 1)
         {
             ucpCiphertextOrPlaintext[j] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 2)
+        else if (ucpCiphertextOrPlaintext[j] == 2 && ucpPassword[j] == 2)
         {
             ucpCiphertextOrPlaintext[j] = 0;
         }
@@ -131,44 +131,44 @@ void TernaryXor2(unsigned char *ucpCiphertextOrPlaintext,
 // 1 1 1
 // 0 2 2
 
-void TernaryXand0(unsigned char *ucpCiphertextOrPlaintext,
+void TrinaryXAnd0(unsigned char *ucpCiphertextOrPlaintext,
                   unsigned char *ucpPassword)
 {
-    for(long long k = 0; k < 6; ++k)
+    for (long long k = 0; k < 6; ++k)
     {
-        if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 0)
+        if (ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 0)
         {
             ucpCiphertextOrPlaintext[k] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 1)
+        else if (ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 2)
+        else if (ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 2)
         {
             ucpCiphertextOrPlaintext[k] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 0)
+        else if (ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 0)
         {
             ucpCiphertextOrPlaintext[k] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 1)
+        else if (ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 2)
+        else if (ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 2)
         {
             ucpCiphertextOrPlaintext[k] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 0)
+        else if (ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 0)
         {
             ucpCiphertextOrPlaintext[k] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 1)
+        else if (ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 2)
+        else if (ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 2)
         {
             ucpCiphertextOrPlaintext[k] = 2;
         }
@@ -179,44 +179,44 @@ void TernaryXand0(unsigned char *ucpCiphertextOrPlaintext,
 // 1 1 1
 // 0 0 2
 
-void TernaryXand2(unsigned char *ucpCiphertextOrPlaintext,
+void TrinaryXAnd2(unsigned char *ucpCiphertextOrPlaintext,
                   unsigned char *ucpPassword)
 {
-    for(long long k = 0; k < 6; ++k)
+    for (long long k = 0; k < 6; ++k)
     {
-        if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 0)
+        if (ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 0)
         {
             ucpCiphertextOrPlaintext[k] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 1)
+        else if (ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 2;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 2)
+        else if (ucpCiphertextOrPlaintext[k] == 0 && ucpPassword[k] == 2)
         {
             ucpCiphertextOrPlaintext[k] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 0)
+        else if (ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 0)
         {
             ucpCiphertextOrPlaintext[k] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 1)
+        else if (ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 2)
+        else if (ucpCiphertextOrPlaintext[k] == 1 && ucpPassword[k] == 2)
         {
             ucpCiphertextOrPlaintext[k] = 1;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 0)
+        else if (ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 0)
         {
             ucpCiphertextOrPlaintext[k] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 1)
+        else if (ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 1)
         {
             ucpCiphertextOrPlaintext[k] = 0;
         }
-        else if(ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 2)
+        else if (ucpCiphertextOrPlaintext[k] == 2 && ucpPassword[k] == 2)
         {
             ucpCiphertextOrPlaintext[k] = 2;
         }
@@ -226,11 +226,11 @@ void TernaryXand2(unsigned char *ucpCiphertextOrPlaintext,
 long long main(long long argc,
                char *argv[])
 {
-    if(argc != 5)
+    if (argc != 5)
     {
         Usage();
     }
-    else if(*(short*)argv[1] == 0x452D || *(short*)argv[1] == 0x652D)
+    else if (*(short*)argv[1] == 0x452D || *(short*)argv[1] == 0x652D)
     {
         struct stat tStatFileSize;
 
@@ -238,7 +238,7 @@ long long main(long long argc,
 
         unsigned long long ulFileSize = tStatFileSize.st_size;
 
-        if(ulFileSize == 0)
+        if (ulFileSize == 0)
         {
             printf("There is no data in file [%s], 0 byte.\n", argv[2]);
 
@@ -247,52 +247,52 @@ long long main(long long argc,
 
         int fdPlaintextOrCiphertext = open(argv[2], O_BINARY | O_RDONLY, S_IREAD | S_IWRITE);
 
-        unsigned char *ucpPlaintext = malloc(ulFileSize), ucaPlaintextOrCiphertext[6];
+        unsigned char *ucpPlaintext = (unsigned char*)malloc(ulFileSize), ucaPlaintextOrCiphertext[6];
 
         read(fdPlaintextOrCiphertext, ucpPlaintext, ulFileSize);
 
         close(fdPlaintextOrCiphertext);
 
-        unsigned short *uspCiphertext = malloc(2 * ulFileSize);
+        unsigned short *uspCiphertext = (unsigned short*)malloc(2 * ulFileSize);
 
         unsigned char ucPasswordLength = -1;
 
         while(argv[4][++ucPasswordLength]);
 
-        unsigned char *ucpPassword = malloc(6 * ucPasswordLength);
+        unsigned char *ucpPassword = (unsigned char*)malloc(6 * ucPasswordLength);
 
-        for(unsigned char i = 0; i < ucPasswordLength; ++i)
+        for (unsigned char i = 0; i < ucPasswordLength; ++i)
         {
-            Ternary(argv[4][i], ucpPassword + 6 * i);
+            Trinary(ucpPassword + 6 * i, argv[4][i]);
         }
 
-        for(unsigned long long j = 0, k = 0; j < ulFileSize; ++j)
+        for (unsigned long long j = 0, k = 0; j < ulFileSize; ++j)
         {
-            Ternary(ucpPlaintext[j], ucaPlaintextOrCiphertext);
+            Trinary(ucaPlaintextOrCiphertext, ucpPlaintext[j]);
 
-            TernaryXor0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXOr0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXor2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXOr2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            /*TernaryXor0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            /*TrinaryXOr0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXAnd0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXor0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXOr0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXAnd2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXor2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXOr2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXAnd0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXor2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXOr2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXAnd2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
+            TrinaryXAnd0(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);
 
-            TernaryXand2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);*/
+            TrinaryXAnd2(ucaPlaintextOrCiphertext, ucpPassword + 6 * k);*/
 
             uspCiphertext[j] = 243 * ucaPlaintextOrCiphertext[0] + 81 * ucaPlaintextOrCiphertext[1] + 27 * ucaPlaintextOrCiphertext[2] + 9 * ucaPlaintextOrCiphertext[3] + 3 * ucaPlaintextOrCiphertext[4] + ucaPlaintextOrCiphertext[5];
 
@@ -309,7 +309,7 @@ long long main(long long argc,
 
         free(ucpPlaintext);
     }
-    else if(*(short*)argv[1] == 0x442D || *(short*)argv[1] == 0x642D)
+    else if (*(short*)argv[1] == 0x442D || *(short*)argv[1] == 0x642D)
     {
         struct stat tStatFileSize;
 
@@ -317,7 +317,7 @@ long long main(long long argc,
 
         unsigned long long ulFileSize = tStatFileSize.st_size;
 
-        if(ulFileSize == 0)
+        if (ulFileSize == 0)
         {
             printf("There is no data in file [%s], 0 byte.\n", argv[2]);
 
@@ -326,7 +326,7 @@ long long main(long long argc,
 
         int fdCiphertextOrPlaintext = open(argv[2], O_BINARY | O_RDONLY, S_IREAD | S_IWRITE);
 
-        unsigned short *uspCiphertext = malloc(ulFileSize);
+        unsigned short *uspCiphertext = (unsigned short*)malloc(ulFileSize);
 
         read(fdCiphertextOrPlaintext, uspCiphertext, ulFileSize);
 
@@ -334,46 +334,46 @@ long long main(long long argc,
 
         ulFileSize /= 2;
 
-        unsigned char *ucpPlaintext = malloc(ulFileSize), ucaCiphertextOrPlaintext[6];
+        unsigned char *ucpPlaintext = (unsigned char*)malloc(ulFileSize), ucaCiphertextOrPlaintext[6];
 
         unsigned char ucPasswordLength = -1;
 
         while(argv[4][++ucPasswordLength]);
 
-        unsigned char *ucpPassword = malloc(6 * ucPasswordLength);
+        unsigned char *ucpPassword = (unsigned char*)malloc(6 * ucPasswordLength);
 
-        for(unsigned char i = 0; i < ucPasswordLength; ++i)
+        for (unsigned char i = 0; i < ucPasswordLength; ++i)
         {
-            Ternary(argv[4][i], ucpPassword + 6 * i);
+            Trinary(ucpPassword + 6 * i, argv[4][i]);
         }
 
-        for(unsigned long long j = 0, k = 0; j < ulFileSize; ++j)
+        for (unsigned long long j = 0, k = 0; j < ulFileSize; ++j)
         {
-            Ternary(uspCiphertext[j], ucaCiphertextOrPlaintext);
+            Trinary(ucaCiphertextOrPlaintext, uspCiphertext[j]);
 
-            TernaryXor2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXOr2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXor0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXOr0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            /*TernaryXand0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            /*TrinaryXAnd0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXor0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXOr0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXand2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXAnd2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXor0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXOr0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXand0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXAnd0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXor2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXOr2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXand2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXAnd2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXor2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXOr2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXand2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
+            TrinaryXAnd2(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);
 
-            TernaryXand0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);*/
+            TrinaryXAnd0(ucaCiphertextOrPlaintext, ucpPassword + 6 * k);*/
 
             ucpPlaintext[j] = 243 * ucaCiphertextOrPlaintext[0] + 81 * ucaCiphertextOrPlaintext[1] + 27 * ucaCiphertextOrPlaintext[2] + 9 * ucaCiphertextOrPlaintext[3] + 3 * ucaCiphertextOrPlaintext[4] + ucaCiphertextOrPlaintext[5];
 
